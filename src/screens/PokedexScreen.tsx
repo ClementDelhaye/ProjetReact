@@ -27,12 +27,12 @@ export function PokedexScreen() {
       
   const navigation = useNavigation<any>();
   
-  function navigateToInfos({id,name,image}:any) {
-    navigation.navigate(Routes.INFOS_SCREEN,id,name,image);
+  function navigateToInfos({name,image,hp,attack,defense,special_attack,special_defense,speed}:any) {
+    navigation.navigate(Routes.INFOS_SCREEN,{name,image,hp,attack,defense,special_attack,special_defense,speed});
   }
 
-  const Item = ({id,name,image}:any) => (
-    <TouchableOpacity onPress={()=>navigateToInfos({id,name,image})}>
+  const Item = ({id,name,image,hp,attack,defense,special_attack,special_defense,speed}:any) => (
+    <TouchableOpacity onPress={()=>navigateToInfos({name,image,hp,attack,defense,special_attack,special_defense,speed})}>
         <Card style={styles.card}>
             <Card.Content style={{alignItems:"center"}}>
                 <Text style={{fontSize:20}}>{name}</Text>
@@ -44,10 +44,10 @@ export function PokedexScreen() {
   );
 
   return (
-    <SafeAreaView style={{backgroundColor:"black"}}>
+    <SafeAreaView style={{backgroundColor:"red"}}>
         <FlatList
           data={data}
-          renderItem={({item}) => <Item id={item.id} name={item.name} image={item.image}/>}
+          renderItem={({item}) => <Item id={item.id} name={item.name} image={item.image} hp={item.stats.HP} attack={item.stats.attack} defense={item.stats.defense} special_attack={item.stats.special_attack} special_defense={item.stats.special_defense} speed={item.stats.speed}/>}
         />
     </SafeAreaView>
   );
